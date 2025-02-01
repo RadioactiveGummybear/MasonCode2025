@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            color: lightgray;
+            background-color: #141313;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .questions-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .question-item {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .question-text {
+            font-size: 1rem;
+            margin-right: 10px;
+            white-space: pre-line;
+        }
+
+        .answer-text {
+            font-size: 1rem;
+            font-weight: bold;
+            display: none;
+            margin-left: 10px;
+            white-space: pre-line;
+        }
+
+        .question-item.answer-visible .answer-text {
+            display: inline;
+        }
+
+        .question-item button {
+            padding: 3px 8px;
+            font-size: 0.9rem;
+            color: white;
+            background-color: #333;
+            border: 1px solid lightgray;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .question-item button:hover {
+            background-color: #444;
+        }
+
+        .question-item button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="questions-container" class="questions-container">
+        <!-- Questions will be dynamically inserted here -->
+    </div>
+
+    <script>
+        const questions = [
+            {question: "Metopic synostosis is called?", answer: "Trigonocephaly"},
+            {question: "Coronal synostosis is called?", answer: "Brachycephaly (think the Crown is slow brachy to move)"},
+            {question: "Lambdoid synostosis is called?", answer: "Posterior Plagiocephaly"},
+            {question: "Sagittal synostosis is called?", answer: "Scaphocephaly"},
+            {question: "Where is a subgaleal hemorrhage located?\n(Think about the layers of the scalp)", answer: "Deep to the aponeurosis and superficial to the periosteum"},
+            {question: "Where is a cephalohematoma located?\n(Think about the periosteum)", answer: "Deep to the periosteum"},
+            {question: "Where is a caput succedaneum located?\n(Where is it in relation to the aponeurosis?)", answer: "Subcutaneous hemorrhage (superficial to the aponeurosis)"},
+            {question: "Focal skull defect with an associated vascular malformation is called?", answer: "Sinus Pericranii"},
+            {question: "3-year-old with large solid renal mass with venous invasion?", answer: "Wilms Tumor (Most likely)"},
+            {question: "3-month-old with large solid renal mass", answer: "Mesoblastic Nephroma (Most likely)"},
+            {question: "L-transposition of the great arteries vs D-transposition?", answer: "L: Aorta anterior and left of the pulmonary artery. D: Anterior and right."},
+            {question: "\nDandy-Walker Malformation findings?\n\n", answer: "1. Hypoplasia of the vermis\n2. Cystic dilation of the 4th ventricle\n3. Enlarged posterior fossa with torcular-lambdoid inversion"},
+            {question: "What is involved in Charge syndrome?\n", answer: "Choloboma, Heart defect, Atresia (choanal), Restricted growth, genitourinary abnormalities, Ear abnormalities."},
+            {question: "What is involved in the Tetrology of Fallot?", answer: "VSD, Overriding aorta, Right ventricular hypertrophy and Right ventricular outflow tract obstruction (RVOTO)"},
+            {question: "Hypodense 4th ventricle mass that extends through the foremen of Magendie?", answer: "Ependymoma"},
+            {question: "Hyperdense 4th ventricle mass and is hyperdense?", answer: "Medulloblastoma"},
+        ];
+
+        function populateQuestions() {
+            const container = document.getElementById('questions-container');
+
+            questions.forEach(item => {
+                const questionItem = document.createElement('div');
+                questionItem.classList.add('question-item');
+
+                const questionText = document.createElement('p');
+                questionText.classList.add('question-text');
+                questionText.textContent = item.question;
+
+                const button = document.createElement('button');
+                button.textContent = "Answer";
+
+                const answerText = document.createElement('p');
+                answerText.classList.add('answer-text');
+                answerText.textContent = item.answer;
+
+                button.addEventListener('click', () => {
+                    questionItem.classList.toggle('answer-visible');
+                    button.textContent = questionItem.classList.contains('answer-visible') ? "Reset" : "Answer";
+                });
+
+                questionItem.appendChild(questionText);
+                questionItem.appendChild(button);
+                questionItem.appendChild(answerText);
+
+                container.appendChild(questionItem);
+            });
+        }
+
+        populateQuestions();
+    </script>
+</body>
+
+</html>
